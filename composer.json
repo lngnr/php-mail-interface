@@ -2,6 +2,7 @@
     "name": "auftraggeber/php-mail-interface",
     "description": "PHP-Interface to send mails from http requests.",
     "type": "library",
+    "version": "1.1.0",
     "require": {
         "phpmailer/phpmailer": "^7",
         "ext-json": "*"
