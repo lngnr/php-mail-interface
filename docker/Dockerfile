@@ -16,7 +16,7 @@ RUN cd /opt/php-mail-interface && rm \
     example \
     docker
 
-FROM php:7.4-apache AS run
+FROM php:8.5-apache AS run
 
 RUN mkdir -p /var/www/html/php-mail-interface
 COPY --from=build /opt/php-mail-interface /var/www/html/php-mail-interface

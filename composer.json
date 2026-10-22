@@ -3,8 +3,13 @@
     "description": "PHP-Interface to send mails from http requests.",
     "type": "library",
     "require": {
-        "phpmailer/phpmailer": "^6.8",
+        "phpmailer/phpmailer": "^7",
         "ext-json": "*"
+    },
+    "require-dev": {
+        "dominikb/composer-license-checker": "^3",
+        "phpcompatibility/php-compatibility": "^10.0.0@dev",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.2"
     },
     "license": "LGPL-2.1",
     "authors": [
@@ -15,7 +20,29 @@
     ],
     "config": {
         "platform": {
-            "php": "7.4"
+            "php": "8.5"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
+    },
+    "scripts": {
+        "check-licenses": [
+            "composer install",
+            "export WPAPP_DB_NAME=${WPAPP_DB_TESTNAME} && ./vendor/bin/composer-license-checker check -a MIT -a BSD-3-Clause -a LGPL-3.0-or-later",
+            "composer install --no-dev"
+        ],
+        "phpcs": [
+            "Composer\\Config::disableProcessTimeout",
+            "composer install",
+            "export PHPRC=/workspaces/php-mail-interface/phpcs-php.ini && vendor/bin/phpcs --config-set installed_paths vendor/phpcompatibility/php-compatibility && vendor/bin/phpcs . --ignore=vendor --standard=PHPCompatibility --runtime-set testVersion 8.5",
+            "composer install --no-dev"
+        ],
+        "phpcs-errors": [
+            "Composer\\Config::disableProcessTimeout",
+            "composer install",
+            "export PHPRC=/workspaces/php-mail-interface/phpcs-php.ini && vendor/bin/phpcs --config-set installed_paths vendor/phpcompatibility/php-compatibility && vendor/bin/phpcs . -n --ignore=vendor/symfony --standard=PHPCompatibility --runtime-set testVersion 8.5",
+            "composer install --no-dev"
+        ]
     }
 }

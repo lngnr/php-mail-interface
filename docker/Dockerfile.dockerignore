@@ -1,0 +1,12 @@
+docker
+!docker/php
+.devcontainer
+.idea
+example
+vendor
+composer.lock
+.gitignore
+README.md
+phpcs-php.ini
+LICENSE
+PHPMAILER_LICENSE
